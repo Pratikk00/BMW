@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+  <div class="d1">
+
+  </div>
+    <button onclick="loadDoc()" >car details</button>
+
+<script>
+
+    function loadDoc() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            const myobj = JSON.parse(this.responseText);
+            var output = "";
+            output += "<table border='1'>";
+            output += "<tr><th>car1</th><th>car2</th><th>car3</th></tr>";
+            for(let i in myobj){
+              output += "<tr><td>"+myobj[i].car1+"</td><td>"+myobj[i].car2+"</td><td>"+myobj[i].car3+"</td></tr>";
+            }
+            output += "</table>";
+            document.getElementById('d1').innerHTML = output;
+          }
+        };
+        xhttp.open('GET', 'cardetails.json',true);
+        xhttp.send();
+      }
+</script>
+</body>
+</html>
